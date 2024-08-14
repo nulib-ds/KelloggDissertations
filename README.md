@@ -12,3 +12,4 @@ Data are from ProQuest, 2004-2023
 ## Code
 * Kellogg_LDA: LDA model for the data with visualization
 * Kellogg_BERTopic: BERTopic mdoel for the data with visualization
+* Visualization: word cloud and bar plot for word frequency
