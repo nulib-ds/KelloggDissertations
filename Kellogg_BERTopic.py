@@ -4,7 +4,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from datetime import datetime
 import matplotlib.pyplot as plt
 import ast
-from sentence_transformers import SentenceTransformer
 import os
 import plotly.io as pio
 from umap import UMAP
