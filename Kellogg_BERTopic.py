@@ -1,6 +1,7 @@
 import pandas as pd
 from bertopic import BERTopic
 from datetime import datetime
+from sentence_transformers import SentenceTransformer
 import os
 import plotly.io as pio
 from umap import UMAP
@@ -11,6 +12,7 @@ time_start = datetime.now()
 result_path = r"/Users/hjr7324/Desktop/Kellogg_Dissertations"
 # Load the CSV file
 df = pd.read_csv(os.path.join(result_path, 'matrix_full.csv'))
+df['Department'] = df['Department'].str.strip()
 df.set_index('GOID', inplace=True)
 year = df['Year']
 df.drop(['Year'], axis=1, inplace=True)

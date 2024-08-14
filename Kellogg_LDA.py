@@ -10,6 +10,7 @@ import os
 # Load the dataset
 result_path = r"/Users/hjr7324/Desktop/Kellogg_Dissertations"  #replace the path with your file folder
 df = pd.read_csv(os.path.join(result_path, 'matrix_full.csv'))
+df['Department'] = df['Department'].str.strip()
 df.set_index('GOID', inplace=True)
 # Save the year result
 year = df['Year']
