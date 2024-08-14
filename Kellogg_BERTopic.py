@@ -1,9 +1,6 @@
 import pandas as pd
 from bertopic import BERTopic
-from sklearn.feature_extraction.text import CountVectorizer
 from datetime import datetime
-import matplotlib.pyplot as plt
-import ast
 import os
 import plotly.io as pio
 from umap import UMAP
