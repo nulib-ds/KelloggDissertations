@@ -9,9 +9,12 @@ from umap import UMAP
 # Get the current time in UTC
 time_start = datetime.now()
 
-result_path = r"/Users/hjr7324/Desktop/Kellogg_Dissertations"
+folder_path = r"/Users/hjr7324/Desktop/Kellogg_Dissertations"
+if not os.path.exists(folder_path + '/results'): # create a results folder
+    os.mkdir(folder_path + '/results')
+
 # Load the CSV file
-df = pd.read_csv(os.path.join(result_path, 'matrix_full.csv'))
+df = pd.read_csv(os.path.join(folder_path, 'matrix_full.csv'))
 df['Department'] = df['Department'].str.strip()
 df.set_index('GOID', inplace=True)
 year = df['Year']
@@ -29,7 +32,7 @@ bertopic_models = {}
 from plotly.subplots import make_subplots
 visualizations = []
 
-with open(os.path.join(result_path, f'bertopic_topics.txt'), 'w') as file:
+with open(os.path.join(folder_path, f'results/bertopic_topics.txt'), 'w') as file:
     for class_label in unique_classes:
         print(f'Processing {class_label}')
         dep_df = df[df['Department'] == class_label]
@@ -69,8 +72,8 @@ with open(os.path.join(result_path, f'bertopic_topics.txt'), 'w') as file:
             file.write("\n---------------\n")
             file.write("\n")
 
-        # plotly_fig = topic_model.visualize_barchart()
-        plotly_fig = topic_model.visualize_documents(dep_df, embeddings=embeddings)
+        plotly_fig = topic_model.visualize_barchart()
+        # plotly_fig = topic_model.visualize_documents(documents, embeddings=embeddings)
         # reduced_embeddings = UMAP(n_neighbors=10, n_components=2, min_dist=0.0, metric='cosine').fit_transform(embeddings)
         # plotly_fig = topic_model.visualize_documents(class_sub, reduced_embeddings=reduced_embeddings)
         # plotly_fig.update_layout({class_label})
@@ -119,7 +122,7 @@ html_content += """
 """
 
 # Save the combined HTML file
-with open(f"{result_path}/BERTopic_vis_doc.html", "w") as f:
+with open(f"{folder_path}/results/BERTopic_vis_bar.html", "w") as f:
     f.write(html_content)
 
 print(f"BERTopic topics saved to bertopic_topics.txt")

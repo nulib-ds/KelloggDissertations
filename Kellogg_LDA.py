@@ -8,8 +8,11 @@ import os
 # conda install "scipy<1.13"
 
 # Load the dataset
-result_path = r"/Users/hjr7324/Desktop/Kellogg_Dissertations"  #replace the path with your file folder
-df = pd.read_csv(os.path.join(result_path, 'matrix_full.csv'))
+folder_path = r"/Users/hjr7324/Desktop/Kellogg_Dissertations"  #replace the path with your file folder
+if not os.path.exists(folder_path + '/results'): # create a results folder
+    os.mkdir(folder_path + '/results')
+
+df = pd.read_csv(os.path.join(folder_path, 'matrix_full.csv'))
 df['Department'] = df['Department'].str.strip()
 df.set_index('GOID', inplace=True)
 # Save the year result
@@ -50,7 +53,7 @@ for class_label in unique_classes:
 
 
 # Display the topics for each department
-with open(f'{result_path}/lda_topics.txt', 'w') as file:
+with open(f'{folder_path}/results/lda_topics.txt', 'w') as file:
     for cls, lda_model in lda_models.items():
         print(f"Department: {cls} \n")
         file.write(f'Department: {cls}:')
@@ -107,5 +110,5 @@ for cls, html_string in html_files:
 final_html = html_template.format(visualizations=visualizations)
 
 # Save to a file
-with open(f'{result_path}/LDA_vis.html', 'w') as file:
+with open(f'{folder_path}/results/LDA_vis.html', 'w') as file:
     file.write(final_html)
