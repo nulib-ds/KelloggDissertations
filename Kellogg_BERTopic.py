@@ -22,10 +22,6 @@ df.drop(['Year'], axis=1, inplace=True)
 department = df['Department']
 unique_classes = department.unique()
 
-documents = []
-for _, row in df.iloc[:, 1:].iterrows():
-    doc = ' '.join([f"{word} " * freq for word, freq in row.items() if freq > 0])
-    documents.append(doc)
 
 bertopic_models = {}
 # Save the topics to a text file
